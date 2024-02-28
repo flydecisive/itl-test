@@ -75,6 +75,7 @@ function UserPage() {
         }
       }
       if (index !== undefined && index >= 0) {
+        users.splice(index, 1);
         dispatch(setFavoritesUsers(users));
         setIsUserFavorite(false);
       }
