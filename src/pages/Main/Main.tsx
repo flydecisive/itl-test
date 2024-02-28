@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAllUsers } from "../../store/actions/creators/users";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/Header/Header";
 import User from "../../components/User/User";
 import Loader from "../../components/Loader/Loader";
 import ArrowIcon from "../../assets/arrow.svg?react";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import styles from "./Main.module.scss";
 
 const MAX_PAGES = 2;
@@ -79,7 +79,6 @@ function MainPage() {
 
   return (
     <div className={styles.main}>
-      <Header />
       <div className={styles.users}>
         {!isLoading &&
           !isError &&
@@ -98,34 +97,32 @@ function MainPage() {
               />
             );
           })}
-        {isLoading && <Loader />}
-        {isError && (
-          <p className={styles.error}>
-            Не удалось загрузить данные. Попробуйте позже.
-          </p>
-        )}
+        {isLoading && <Loader template="grid" />}
+        {isError && <ErrorMessage template="grid" />}
       </div>
-      <div className={styles.pagination}>
-        <button
-          className={`${styles.pagination__button} ${
-            pagesCount > 1 && styles["pagination__button-accent"]
-          }`}
-          disabled={pagesCount <= 1}
-          onClick={handlePrevButton}
-        >
-          <ArrowIcon />
-        </button>
-        <div className={styles.pagination__counter}>{pagesCount}</div>
-        <button
-          className={`${styles.pagination__button} ${
-            pagesCount < MAX_PAGES && styles["pagination__button-accent"]
-          }`}
-          disabled={pagesCount === MAX_PAGES}
-          onClick={handleNextButton}
-        >
-          <ArrowIcon className={styles["arrow-prev"]} />
-        </button>
-      </div>
+      {!isError && !isLoading && (
+        <div className={styles.pagination}>
+          <button
+            className={`${styles.pagination__button} ${
+              pagesCount > 1 && styles["pagination__button-accent"]
+            }`}
+            disabled={pagesCount <= 1}
+            onClick={handlePrevButton}
+          >
+            <ArrowIcon />
+          </button>
+          <div className={styles.pagination__counter}>{pagesCount}</div>
+          <button
+            className={`${styles.pagination__button} ${
+              pagesCount < MAX_PAGES && styles["pagination__button-accent"]
+            }`}
+            disabled={pagesCount === MAX_PAGES}
+            onClick={handleNextButton}
+          >
+            <ArrowIcon className={styles["arrow-prev"]} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -7,8 +7,15 @@
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    grid-column: span 8;
-    justify-self: center;
+
+    &-grid {
+        grid-column: span 8;
+        justify-self: center;
+    }
+
+    &-flex {
+        align-self: center;
+    }
 }
 
 @keyframes rotation {

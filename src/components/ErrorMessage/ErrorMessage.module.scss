@@ -1,0 +1,16 @@
+@import '../../vars';
+
+.error {
+    font-weight: 700;
+    font-size: 24px;    
+    color: $base-white;
+
+    &-grid {
+        grid-column: span 8;
+        justify-self: center;
+    }
+
+    &-flex {
+        align-self: center;
+    }
+}

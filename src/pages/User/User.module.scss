@@ -1,0 +1,55 @@
+@import '../../vars';
+
+.user {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__name {
+        font-weight: 700;
+        font-size: 24px;
+        color: $base-white;
+    }
+}
+
+.icon {
+    stroke: $base-white;
+    transition: all .3s;
+
+    &:hover {
+        stroke: none;
+        fill: $accent-yellow;
+        cursor: pointer;
+    }
+
+    &-active {
+        stroke: none;
+        fill: $accent-yellow;
+    }
+}
+
+.info {
+    font-weight: 700;
+    font-size: 14px;
+    color: $base-white;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.posts {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 17px;
+}

@@ -10,7 +10,10 @@ export const Api = createApi({
       query: (arg: { start: number; limit: number }) =>
         `/users/?_start=${arg.start}&_limit=${arg.limit}`,
     }),
+    getUserPosts: builder.query<any, { id: number }>({
+      query: (arg: { id: number }) => `/posts?userId=${arg.id}`,
+    }),
   }),
 });
 
-export const { useLazyGetUsersQuery } = Api;
+export const { useLazyGetUsersQuery, useLazyGetUserPostsQuery } = Api;

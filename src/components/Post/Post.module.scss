@@ -1,0 +1,27 @@
+@import '../../vars';
+
+.post {
+    padding: 15px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 18px;
+    background-color: $base-black-1;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+
+
+    &__title, &__body {
+        color: $base-white;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    &__body {
+        font-weight: 400;
+        font-size: 13px;
+    }
+}
