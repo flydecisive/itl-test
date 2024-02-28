@@ -6,7 +6,7 @@ interface UserProps {
   email: string;
   phone: string;
   website: string;
-  onClick: (params: { id: number }) => void;
+  onClick: () => void;
 }
 
 function User({ name, username, email, phone, website, onClick }: UserProps) {
