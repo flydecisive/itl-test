@@ -1,0 +1,3 @@
+export const SET_ALL_USERS = "SET_ALL_USERS";
+export const SET_FAVORITES_USERS = "SET_FAVORITES_USERS";
+export const SET_USER_POSTS = "SET_USER_POSTS";

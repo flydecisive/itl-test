@@ -1,0 +1,22 @@
+@import '../../vars';
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__elem {
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0em;
+        color: $bg-white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
