@@ -1,8 +1,6 @@
-import { useLazyGetUsersQuery } from "../../services/api";
-import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setAllUsers } from "../../store/actions/creators/users";
 import { useNavigate } from "react-router-dom";
+import { useUserRequestContext } from "../../contexts/userRequest";
 
 import User from "../../components/User/User";
 import Loader from "../../components/Loader/Loader";
@@ -13,75 +11,28 @@ import styles from "./Main.module.scss";
 const MAX_PAGES = 2;
 
 function MainPage() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [fetchUsersQuery, { data: allUsers, isLoading, isError }] =
-    useLazyGetUsersQuery();
   const users = useSelector((store: any) => store.users.allUsers);
-  const [pagesCount, setPagesCount] = useState<number>(1);
-  const [usersRequestData, setUsersRequestData] = useState<{
-    start: number;
-    limit: number;
-  }>({ start: 0, limit: 5 });
-
-  useEffect(() => {
-    fetchUsersQuery(usersRequestData);
-  }, [usersRequestData]);
-
-  useEffect(() => {
-    if (allUsers) {
-      const users = shuffleUsers([
-        ...allUsers,
-        ...allUsers,
-        ...allUsers,
-        ...allUsers,
-      ]);
-
-      dispatch(setAllUsers(users));
-    }
-  }, [allUsers]);
-
-  useEffect(() => {
-    if (pagesCount === 1) {
-      setUsersRequestData({ start: 0, limit: 5 });
-    } else if (pagesCount === 2) {
-      setUsersRequestData({ start: 5, limit: 6 });
-    }
-  }, [pagesCount]);
+  const { data, setData } = useUserRequestContext();
 
   const handleUserClick = (id: number) => {
     navigate(`/user/${id}`);
   };
 
   const handlePrevButton = () => {
-    setPagesCount(pagesCount - 1);
+    setData({ ...data, pagesCount: data.pagesCount - 1 });
   };
 
   const handleNextButton = () => {
-    setPagesCount(pagesCount + 1);
+    setData({ ...data, pagesCount: data.pagesCount + 1 });
   };
-
-  // Рандомное перемешивание пользователей, по сколько API возвращает всего 10 пользователей, а вы хотите пагинацию на 2 страницы :)
-  function shuffleUsers(array: object[]) {
-    const shuffledArray = array.slice();
-
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
-    }
-
-    return shuffledArray;
-  }
 
   return (
     <div className={styles.main}>
       <div className={styles.users}>
-        {!isLoading &&
-          !isError &&
+        {!data.isLoading &&
+          !data.isError &&
           users.map((user: any, index: number) => {
             return (
               <User
@@ -97,26 +48,26 @@ function MainPage() {
               />
             );
           })}
-        {isLoading && <Loader template="grid" />}
-        {isError && <ErrorMessage template="grid" />}
+        {data.isLoading && <Loader template="grid" />}
+        {data.isError && <ErrorMessage template="grid" />}
       </div>
-      {!isError && !isLoading && (
+      {!data.isError && !data.isLoading && (
         <div className={styles.pagination}>
           <button
             className={`${styles.pagination__button} ${
-              pagesCount > 1 && styles["pagination__button-accent"]
+              data.pagesCount > 1 && styles["pagination__button-accent"]
             }`}
-            disabled={pagesCount <= 1}
+            disabled={data.pagesCount <= 1}
             onClick={handlePrevButton}
           >
             <ArrowIcon />
           </button>
-          <div className={styles.pagination__counter}>{pagesCount}</div>
+          <div className={styles.pagination__counter}>{data.pagesCount}</div>
           <button
             className={`${styles.pagination__button} ${
-              pagesCount < MAX_PAGES && styles["pagination__button-accent"]
+              data.pagesCount < MAX_PAGES && styles["pagination__button-accent"]
             }`}
-            disabled={pagesCount === MAX_PAGES}
+            disabled={data.pagesCount === MAX_PAGES}
             onClick={handleNextButton}
           >
             <ArrowIcon className={styles["arrow-prev"]} />

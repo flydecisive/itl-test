@@ -9,7 +9,7 @@ export const setAllUsers = (allUsers: object) => ({
   payload: { allUsers },
 });
 
-export const setFavoritesUsers = (favoritesUsers: []) => ({
+export const setFavoritesUsers = (favoritesUsers: object) => ({
   type: SET_FAVORITES_USERS,
   payload: { favoritesUsers },
 });

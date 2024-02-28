@@ -33,6 +33,11 @@
     &-active {
         stroke: none;
         fill: $accent-yellow;
+
+        &:hover {
+            stroke: $base-white;
+            fill: none;
+        }
     }
 }
 
