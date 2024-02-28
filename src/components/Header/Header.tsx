@@ -14,7 +14,7 @@ function Header() {
     <div className={styles.header}>
       <div className={styles.header__elem} onClick={handleHeaderElem}>
         Избранное
-        <StarIcon />
+        <StarIcon className={styles.icon} />
       </div>
     </div>
   );

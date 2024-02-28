@@ -4,7 +4,7 @@ import {
   SET_USER_POSTS,
 } from "../types/users";
 
-export const setAllUsers = (allUsers: []) => ({
+export const setAllUsers = (allUsers: object) => ({
   type: SET_ALL_USERS,
   payload: { allUsers },
 });

@@ -1,0 +1,29 @@
+@import '../../vars';
+
+.user {
+    padding: 15px 20px;
+    box-sizing: border-box;
+    color: $base-white;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    border-radius: 18px;
+    background-color: $base-black-1;
+    transition: all .3s;
+    grid-column: span 2;
+
+    &:hover {
+        background-color: $base-black-2;
+        cursor: pointer;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    &__info {
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
